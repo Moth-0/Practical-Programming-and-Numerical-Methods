@@ -5,7 +5,7 @@ namespace pp{
 struct vec{
     double x,y,z; 
     // Constructor
-    vec(double a, double b, double c){x=a; y=b; z=b;}
+    vec(double a, double b, double c){x=a; y=b; z=c;}
     vec() : vec(0, 0, 0) {}
 
     vec(const vec&) = default;  // Copy vec a = b
@@ -17,8 +17,8 @@ struct vec{
     vec& operator=(vec&&) = default;      // move assignment a=b+c
 
     //operation
-    vec& operator+=(double);
-    vec& operator-=(double);
+    vec& operator+=(const vec&);
+    vec& operator-=(const vec&);
     vec& operator*=(double);
     vec& operator/=(double);
 
