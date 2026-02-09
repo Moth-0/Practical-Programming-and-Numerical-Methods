@@ -31,10 +31,10 @@ struct vec{
 };
 // non-members
 vec operator-(const vec);
-vec operator+(const vec&, const vec&); 
-vec operator-(const vec&, const vec&);
-vec operator*(const vec&, double); 
-vec operator*(double, const vec&);
+vec operator+(vec, const vec&); 
+vec operator-(vec, const vec&);
+vec operator*(vec, double); 
+vec operator*(double, vec);
 vec operator/(const vec&, double);
  
 }

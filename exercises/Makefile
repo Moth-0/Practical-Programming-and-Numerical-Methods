@@ -16,7 +16,6 @@ Out.txt : $(TARGET)
 	./$(TARGET) > Out.txt
 	cat Out.txt
 
-
 $(TARGET) : $(OBJECTS)
 	$(CXX) $(LDFLAGS) $(LDLIBS) -o $(TARGET) $(OBJECTS)
 
@@ -24,4 +23,4 @@ $(TARGET) : $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -c $^ -o $@
 
 clean :
-	$(RM) Out.txt $(TARGET) $(OBJECTS)
+	$(RM) *.txt $(TARGET) $(OBJECTS)

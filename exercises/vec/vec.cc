@@ -33,36 +33,32 @@ vec& vec::operator/=(double n){
 	return (*this);
 }
 
-vec operator+(const vec& a, const vec& b){
-	vec r=a;
-	r+=b;
-	return r;
+vec operator+(vec a, const vec& b){
+	a += b;
+	return a;
 }
 
-vec operator-(const vec& a){
+vec operator-(vec a){
 	vec r=a;
-	r.x=-r.x;
-	r.y=-r.y;
-	r.z=-r.z;
-	return r;
+	a.x=-a.x;
+	a.y=-a.y;
+	a.z=-a.z;
+	return a;
 }
 
-vec operator-(const vec& a, const vec& b){
-	vec r=a;
-	r-=b;
-	return r;
+vec operator-(vec a, const vec& b){
+	a -= b;
+	return a;
 }
 
-vec operator*(const vec& a, double n){
-	vec r=a;
-	r*=n;
-	return r;
+vec operator*(vec a, double n){
+	a *= n;
+	return a;
 }
 
-vec operator*(double n, const vec& a){
-	vec r=a;
-	r*=n;
-	return r;
+vec operator*(double n, vec a){
+	a *= n;
+	return a;
 }
 
 bool approx(double a,double b,double acc=1e-6,double eps=1e-6){
