@@ -7,13 +7,40 @@ RM = rm -f
 all : Out.txt
 
 Out.txt : main Makefile
-	./main > Out.txt
+	./main > Out.txt 
 	cat Out.txt
+
+times.data : time
+	>$@
+	for N in $$(seq 100 100 1000); do \
+		time --format "$$N %e" --output $@ --append \
+		./$< -size $$N 1>out 2>err ;\
+	done 
+
+times.png: times.data Makefile
+	echo '\
+	set terminal png ;\
+	set output "$@" ;\
+	set xlabel "N" ;\
+	set ylabel "time (s)" ;\
+	set tics out ;\
+	f(x) = a*x**3 ;\
+	fit f(x) "times.data" using 1:2 via a ;\
+	plot [0:1000] \
+		"times.data" using 1:2 with points title "times.data",\
+		f(x) with lines title "a*N**3";\
+	' | tee log.fig3.gpi | gnuplot
 
 main : main.o
 	$(CXX) $(LDFLAGS) $(LDLIBS) -o $@ $^
 
 main.o : main.cc matrix.h QR.h
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+time : time.o
+	$(CXX) $(LDFLAGS) $(LDLIBS) -o $@ $^
+
+time.o : time.cc matrix.h QR.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean :
